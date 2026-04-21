@@ -1,1 +1,1 @@
-# belief-revision-agent
+# Belief Revision Agent
