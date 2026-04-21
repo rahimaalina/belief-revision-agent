@@ -1,6 +1,6 @@
 # Belief Revision Agent
 
-This project implements the **belief base component** of a belief revision system for propositional logic, developed as part of an Intro to Artificial Intelligence course.
+This project implements the **belief base component** of a belief revision system for propositional logic.
 
 ## 📌 Overview
 
