@@ -36,7 +36,3 @@ The belief base acts as the **foundation** for reasoning and belief revision.
 - Add new beliefs  
 - Remove existing beliefs  
 - Display the belief base  
-
----
-
-## 📁 Project Structure
