@@ -6,13 +6,14 @@ This project implements the **belief base component** of a belief revision syste
 
 In artificial intelligence, a belief revision system is responsible for maintaining a consistent set of beliefs when new information is introduced.  
 
-This repository focuses on the **first stage** of the system:
+This repository currently implements the following stages of a belief revision system:
 
 - Designing a belief base
 - Storing logical formulas
 - Managing priorities of beliefs
+- Logical entailment using resolution
 
-This component will be extended with logical reasoning and revision mechanisms in later stages.
+The system has been extended with a reasoning component that allows the agent to derive conclusions from the belief base.
 
 ---
 
@@ -36,3 +37,64 @@ The belief base acts as the **foundation** for reasoning and belief revision.
 - Add new beliefs  
 - Remove existing beliefs  
 - Display the belief base  
+
+---
+
+## 🔍 Logical Entailment
+
+The system includes a logical entailment module that determines whether a given formula follows from the belief base.
+
+The implementation is based on the **resolution method** for propositional logic.
+
+### How it works
+
+To check whether a belief base `B` entails a formula `φ`, the system:
+
+1. Converts all formulas into Conjunctive Normal Form (CNF)
+2. Adds the negation of the query `NOT φ`
+3. Applies the resolution algorithm
+4. Checks whether a contradiction (empty clause) is derived
+
+If a contradiction is found, the query is entailed by the belief base.
+
+### Supported logical transformations
+
+- Implication elimination:  
+  `A -> B` → `NOT A OR B`
+
+- De Morgan’s laws:  
+  `NOT (A AND B)` → `NOT A OR NOT B`  
+  `NOT (A OR B)` → `NOT A AND NOT B`
+
+- Double negation:  
+  `NOT NOT A` → `A`
+
+- Distribution:  
+  `A OR (B AND C)` → `(A OR B) AND (A OR C)`
+
+### Example
+
+Given:
+
+```
+A
+A -> B
+```
+
+Query:
+
+```
+B
+```
+
+Result:
+
+```
+True
+```
+
+---
+
+⚠️ **Note**
+
+The logical parser supports a restricted subset of propositional logic expressions and is designed for the scope of this project.
