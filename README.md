@@ -98,3 +98,40 @@ True
 ⚠️ **Note**
 
 The logical parser supports a restricted subset of propositional logic expressions and is designed for the scope of this project.
+
+## Expansion
+
+The system supports the expansion operation, which is used to add new information to the belief base.
+
+### Definition
+
+Expansion is defined as:
+`B + φ = B ∪ {φ}`
+
+This means that the new belief φ is simply added to the belief base without removing any existing beliefs.
+
+### Implementation
+
+Expansion is implemented through the expand() method in the belief base:
+
+- Adds a new belief with an optional priority
+- Does not check for consistency
+- Does not modify existing beliefs
+
+Internally, the method reuses the add() function.
+
+### Example 
+`bb = BeliefBase()`
+
+`bb.add("A")`
+`bb.add("A -> B")`
+
+`bb.expand("B")`
+
+`bb.show()`
+
+Belief Base:
+- `A`
+- `A -> B`
+- `B`
+
