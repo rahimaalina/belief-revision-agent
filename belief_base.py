@@ -232,3 +232,38 @@ class BeliefBase:
         print("Belief Base:")
         for b in self.beliefs:
             print(f"- {b} (priority {self.priority[b]})")
+
+    #Contraction
+    def contract(self, phi):
+            from entailment import Entailment
+
+            entailment = Entailment(self)
+
+            # Vacuity
+            if not entailment.entails(phi):
+                return
+
+            temp = BeliefBase()
+            for b in self.beliefs:
+                temp.add(b, self.priority[b])
+
+            for belief in temp.get_sorted_beliefs():
+                temp.remove(belief)
+
+                if not Entailment(temp).entails(phi):
+                    break
+
+            self.beliefs = temp.beliefs
+            self.priority = temp.priority
+
+    def expand(self, phi, priority=1):
+        """
+        Expansion:
+        B + phi = B union {phi}
+
+        This only adds the new belief.
+        It does not check consistency.
+        It does not remove anything.
+        """
+        if not self.contains(phi):
+            self.add(phi, priority) 
